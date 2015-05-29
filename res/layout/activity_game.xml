@@ -19,7 +19,7 @@
 			android:textAppearance="?android:attr/textAppearanceMedium"
 			android:layout_width="wrap_content"
 			android:id="@+id/currentPlayerLabel"
-			android:layout_centerHorizontal="true"/>
+			android:layout_marginLeft="10dp"/>
 
 		<TextView
 			android:layout_height="wrap_content"
@@ -27,8 +27,27 @@
 			android:textAppearance="?android:attr/textAppearanceLarge"
 			android:layout_width="wrap_content"
 			android:layout_below="@id/currentPlayerLabel"
-			android:layout_centerHorizontal="true"
-			android:id="@+id/currentPlayerName"/>
+			android:id="@+id/currentPlayerName"
+			android:layout_marginLeft="10dp"/>
+
+		<TextView
+			android:layout_height="wrap_content"
+			android:text="Medium Text"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:layout_width="wrap_content"
+			android:id="@+id/totalPlayerBrainsLabel"
+			android:layout_alignParentRight="true"
+			android:layout_marginRight="10dp"/>
+
+		<TextView
+			android:layout_height="wrap_content"
+			android:text="Large Text"
+			android:textAppearance="?android:attr/textAppearanceLarge"
+			android:layout_width="wrap_content"
+			android:layout_below="@id/totalPlayerBrainsLabel"
+			android:layout_alignParentRight="true"
+			android:layout_marginRight="10dp"
+			android:id="@+id/totalPlayerBrains"/>
 
 	</RelativeLayout>
 
