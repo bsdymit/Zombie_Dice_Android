@@ -15,7 +15,7 @@
 
 		<TextView
 			android:layout_height="wrap_content"
-			android:text="Medium Text"
+			android:text="Current Player"
 			android:textAppearance="?android:attr/textAppearanceMedium"
 			android:layout_width="wrap_content"
 			android:id="@+id/currentPlayerLabel"
@@ -32,7 +32,7 @@
 
 		<TextView
 			android:layout_height="wrap_content"
-			android:text="Medium Text"
+			android:text="Total Brains"
 			android:textAppearance="?android:attr/textAppearanceMedium"
 			android:layout_width="wrap_content"
 			android:id="@+id/totalPlayerBrainsLabel"
@@ -78,7 +78,7 @@
 
 			<TextView
 				android:layout_height="wrap_content"
-				android:text="Medium Text"
+				android:text="Round Brains"
 				android:textAppearance="?android:attr/textAppearanceMedium"
 				android:layout_width="wrap_content"
 				android:layout_below="@id/brainsImage"
@@ -103,7 +103,7 @@
 
 			<TextView
 				android:layout_height="wrap_content"
-				android:text="Medium Text"
+				android:text="Round Shots"
 				android:textAppearance="?android:attr/textAppearanceMedium"
 				android:layout_width="wrap_content"
 				android:layout_below="@id/shotgunsImage"
@@ -142,13 +142,13 @@
 
 			<Button
 				android:layout_height="170dp"
-				android:text="Button"
+				android:text="Roll"
 				android:layout_width="100dp"
 				android:id="@+id/rollButton"/>
 
 			<Button
 				android:layout_height="100dp"
-				android:text="Button"
+				android:text="Save Brains"
 				android:layout_width="100dp"
 				android:layout_below="@id/rollButton"
 				android:id="@+id/stopButton"/>
@@ -159,7 +159,7 @@
 
 	<Button
 		android:layout_height="wrap_content"
-		android:text="Button"
+		android:text="Quit Game"
 		android:layout_width="match_parent"
 		android:layout_row="3"
 		android:layout_column="0"
