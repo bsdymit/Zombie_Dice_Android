@@ -20,6 +20,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+		<activity
+        android:name="com.mycompany.zombiedice.PlayerEntry"
+        android:label="@string/playerEntry"
+        android:parentActivityName="com.mycompany.zombiedice.MainActivity" >
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.mycompany.zombiedice.MainActivity" />
+    	</activity>
+		<activity
+			android:name="com.mycompany.zombiedice.Game"
+			android:label="@string/game"
+			android:parentActivityName="com.mycompany.zombiedice.PlayerEntry" >
+			<meta-data
+				android:name="android.support.PARENT_ACTIVITY"
+				android:value="com.mycompany.zombiedice.MainActivity" />
+    	</activity>
     </application>
 
 </manifest>
