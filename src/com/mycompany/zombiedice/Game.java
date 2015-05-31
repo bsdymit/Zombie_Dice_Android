@@ -29,6 +29,7 @@ public class Game extends Activity
 	private int lastPlayer;
 	private char[] rollResults;
 	TextView currentPlayer;
+	TextView totalBrains;
 
 	@Override
     protected void onCreate(Bundle savedInstanceState) 
@@ -54,7 +55,9 @@ public class Game extends Activity
 		this.shotguns = 0;
 		this.turnCounter = 0;
 		this.finalRound = false;
-
+		int buttonId = getResources().getIdentifier("totalPlayerBrains", "id", getPackageName());
+		this.totalBrains = (TextView)findViewById(buttonId);
+		this.totalBrains.setText(Integer.toString(brains));
 		//currentPlayer = 
 	}
 
@@ -70,13 +73,13 @@ public class Game extends Activity
 		if (shotguns >= 3)
 		{
 			//Print Shotguns
-			nextTurn();
+			//nextTurn();
 		}
 	}
 
 	public void stop()
 	{
-		nextTurn();
+		//nextTurn();
 	}
 
 	public void quit()

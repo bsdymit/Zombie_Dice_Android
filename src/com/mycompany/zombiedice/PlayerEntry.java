@@ -112,7 +112,7 @@ public class PlayerEntry extends Activity
 	public void startGame(View view)
 	{
 		Intent intent = new Intent(this, Game.class);
-		intent.putExtra("queue", queue);
+		//intent.putExtra("queue", queue);
 		startActivity(intent);
 	}
 }
