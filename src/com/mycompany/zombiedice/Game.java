@@ -95,13 +95,8 @@ public class Game extends Activity
 		if (shotguns >= 3)
 		{
 			//Print Shotguns
-			//nextTurn();
+			nextTurn(null);
 		}
-	}
-
-	public void stop()
-	{
-		//nextTurn();
 	}
 
 	public void quit()
@@ -126,7 +121,7 @@ public class Game extends Activity
 		brains = ai.getBrains();
 		shotguns = ai.getShotguns();
 		rollResults = ai.getRollResults();
-		nextTurn();
+		nextTurn(null);
 	}
 
 	/**
@@ -136,13 +131,23 @@ public class Game extends Activity
 	 * brains to their total brains. 
 	 */
 	 
-	private void nextTurn()
+	public void nextTurn(View view)
 	{
 		if(this.finalRound && turnCounter == this.lastPlayer)
 			endGame();
 			
 		if (shotguns < 3)
+		{
 			players.getPlayers()[turnCounter].addBrains(brains);
+			int buttonId = getResources().getIdentifier("totalPlayerBrains", "id", getPackageName());
+			this.totalBrains = (TextView)findViewById(buttonId);
+			this.totalBrains.setText(Integer.toString(players.getPlayers()[turnCounter].getBrainScore()));
+		}
+		/*try{
+			Thread.sleep(1000);
+		} catch(InterruptedException ex) {
+			Thread.currentThread().interrupt();
+		}*/
 			
 		brains = 0;
 		shotguns = 0;
@@ -153,18 +158,32 @@ public class Game extends Activity
 			this.lastPlayer = turnCounter;
 		}
 
+		dice = new Dice();
+
+		if (turnCounter < players.getTotalPlayers() - 1)
+			turnCounter++;
 		else
-		{
-			dice = new Dice();
+			turnCounter = 0;
+			
+		int buttonId = getResources().getIdentifier("currentPlayerName", "id", getPackageName());
+		this.currentPlayer = (TextView)findViewById(buttonId);
+		this.currentPlayer.setText(this.players.getName(turnCounter));
+		
+		buttonId = getResources().getIdentifier("totalPlayerBrains", "id", getPackageName());
+		this.totalBrains = (TextView)findViewById(buttonId);
+		this.totalBrains.setText(Integer.toString(this.players.getPlayers()[turnCounter].getBrainScore()));
+		
+		buttonId = getResources().getIdentifier("brainsImage", "id", getPackageName());
+		this.brainsImage = (ImageView)findViewById(buttonId);
+		this.brainsImage.setBackgroundResource(numbers[brains]);
 
-			if (turnCounter < players.getTotalPlayers() - 1)
-				turnCounter++;
-			else
-				turnCounter = 0;
 
-			if (players.getPlayers()[turnCounter].getType() == 'c')
-				ai();
-		}
+		buttonId = getResources().getIdentifier("shotgunsImage", "id", getPackageName());
+		this.shotsImage = (ImageView)findViewById(buttonId);
+		this.shotsImage.setBackgroundResource(numbers[shotguns]);
+
+		if (players.getPlayers()[turnCounter].getType() == 'c')
+			ai();
 	}
 
 	/**
