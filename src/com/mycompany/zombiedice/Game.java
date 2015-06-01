@@ -30,6 +30,13 @@ public class Game extends Activity
 	private char[] rollResults;
 	TextView currentPlayer;
 	TextView totalBrains;
+	ImageView brainsImage;
+	ImageView shotsImage;
+	int[] numbers = {R.drawable.zero, R.drawable.one, R.drawable.two, 
+					R.drawable.three, R.drawable.four, R.drawable.five, 
+					R.drawable.six, R.drawable.seven, R.drawable.eight,
+					R.drawable.nine, R.drawable.ten, R.drawable.eleven, 
+					R.drawable.twelve, R.drawable.thirteen};
 
 	@Override
     protected void onCreate(Bundle savedInstanceState) 
@@ -68,17 +75,21 @@ public class Game extends Activity
 		this.currentPlayer.setText(this.players.getName(turnCounter));
 	}
 
-	public void roll()
+	public void roll(View view)
 	{
 		dice.roll();
 		shotguns += dice.getNumShotguns();
 		brains += dice.getNumBrains();
 
-		// Prints out dice results 
-		int buttonId = getResources().getIdentifier("totalPlayerBrains", "id", getPackageName());
-		this.totalBrains = (TextView)findViewById(buttonId);
-		this.totalBrains.setText(Integer.toString(brains));
+		// Print out dice results 
+		int buttonId = getResources().getIdentifier("brainsImage", "id", getPackageName());
+		this.brainsImage = (ImageView)findViewById(buttonId);
+		this.brainsImage.setBackgroundResource(numbers[brains]);
 
+		
+		buttonId = getResources().getIdentifier("shotgunsImage", "id", getPackageName());
+		this.shotsImage = (ImageView)findViewById(buttonId);
+		this.shotsImage.setBackgroundResource(numbers[shotguns]);
 		
 		// Checks to see if player was shotgunned
 		if (shotguns >= 3)
