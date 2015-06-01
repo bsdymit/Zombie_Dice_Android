@@ -10,6 +10,7 @@ import android.content.Intent;
 import PlayerQueue;
 import Dice;
 import AI;
+import android.content.*;
 
 /**
  * 
@@ -18,7 +19,8 @@ import AI;
  * @author Bradley Dymit
  *
  */
-public class Game extends Activity
+
+import android.view.View.*;public class Game extends Activity
 {
 	private int turnCounter;
 	private PlayerQueue players;
@@ -133,9 +135,6 @@ public class Game extends Activity
 	 
 	public void nextTurn(View view)
 	{
-		if(this.finalRound && turnCounter == this.lastPlayer)
-			endGame();
-			
 		if (shotguns < 3)
 		{
 			players.getPlayers()[turnCounter].addBrains(brains);
@@ -164,6 +163,9 @@ public class Game extends Activity
 			turnCounter++;
 		else
 			turnCounter = 0;
+			
+		if(this.finalRound && turnCounter == this.lastPlayer)
+			endGame();
 			
 		int buttonId = getResources().getIdentifier("currentPlayerName", "id", getPackageName());
 		this.currentPlayer = (TextView)findViewById(buttonId);
@@ -196,7 +198,17 @@ public class Game extends Activity
 	 
 	private void endGame()
 	{	
-
 		//Display Winner and prompt play again
+		int winner = 0;
+		for(int i = 0; i < this.players.getTotalPlayers(); i++)
+		{
+			if(this.players.getPlayers()[i].getBrainScore() > 
+				this.players.getPlayers()[winner].getBrainScore())
+				winner = i;
+		}
+		new AlertDialog.Builder(this)
+			.setTitle("GAME OVER")
+			.setMessage("WINNER:\n" + this.players.getPlayers()[winner].getName())
+			.show();
 	}
 }
