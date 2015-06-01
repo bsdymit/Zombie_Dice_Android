@@ -39,8 +39,10 @@ public class Game extends Activity
 		ActionBar actionbar = getActionBar();
 		actionbar.hide();
 
-		Intent intent = getIntent();
-		PlayerQueue queue = (PlayerQueue)intent.getSerializableExtra("queue");
+		Intent intent=this.getIntent();
+		Bundle bundle=intent.getExtras();
+		
+		PlayerQueue queue = (PlayerQueue)bundle.getSerializable("queue");
 
 		initializeGame(queue);
 		
@@ -55,10 +57,15 @@ public class Game extends Activity
 		this.shotguns = 0;
 		this.turnCounter = 0;
 		this.finalRound = false;
+		turnCounter = 0;
+		
 		int buttonId = getResources().getIdentifier("totalPlayerBrains", "id", getPackageName());
 		this.totalBrains = (TextView)findViewById(buttonId);
 		this.totalBrains.setText(Integer.toString(brains));
-		//currentPlayer = 
+		
+		buttonId = getResources().getIdentifier("currentPlayerName", "id", getPackageName());
+		this.currentPlayer = (TextView)findViewById(buttonId);
+		this.currentPlayer.setText(this.players.getName(turnCounter));
 	}
 
 	public void roll()

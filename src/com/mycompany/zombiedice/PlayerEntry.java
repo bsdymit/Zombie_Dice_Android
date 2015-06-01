@@ -112,7 +112,9 @@ public class PlayerEntry extends Activity
 	public void startGame(View view)
 	{
 		Intent intent = new Intent(this, Game.class);
-		//intent.putExtra("queue", queue);
+		Bundle b = new Bundle();
+		b.putSerializable("queue", queue);
+		intent.putExtras(b);
 		startActivity(intent);
 	}
 }
