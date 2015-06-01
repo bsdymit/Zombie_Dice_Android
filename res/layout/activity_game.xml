@@ -72,7 +72,7 @@
 			<ImageView
 				android:layout_height="80dp"
 				android:layout_width="80dp"
-				android:src="@android:drawable/ic_delete"
+				android:src="@drawable/zero"
 				android:id="@+id/brainsImage"
 				android:layout_centerHorizontal="true"/>
 
@@ -97,7 +97,7 @@
 			<ImageView
 				android:layout_height="80dp"
 				android:layout_width="80dp"
-				android:src="@android:drawable/ic_delete"
+				android:src="@drawable/zero"
 				android:id="@+id/shotgunsImage"
 				android:layout_centerHorizontal="true"/>
 

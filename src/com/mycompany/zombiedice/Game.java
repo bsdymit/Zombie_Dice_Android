@@ -75,7 +75,11 @@ public class Game extends Activity
 		brains += dice.getNumBrains();
 
 		// Prints out dice results 
+		int buttonId = getResources().getIdentifier("totalPlayerBrains", "id", getPackageName());
+		this.totalBrains = (TextView)findViewById(buttonId);
+		this.totalBrains.setText(Integer.toString(brains));
 
+		
 		// Checks to see if player was shotgunned
 		if (shotguns >= 3)
 		{
@@ -102,7 +106,7 @@ public class Game extends Activity
 	 * 
 	 * This method calls the AI class and provides it with necessary variables
 	 * to have a computer play independently of a user. 
-	 * 
+	 */ 
 	 
 	private void ai()
 	{
@@ -119,7 +123,7 @@ public class Game extends Activity
 	 * This private method ends a player's turn and moves to the next player. If the 
 	 * current player did not get shotgunned then they transfer their round
 	 * brains to their total brains. 
-	 * 
+	 */
 	 
 	private void nextTurn()
 	{
@@ -158,11 +162,11 @@ public class Game extends Activity
 	 * computer has reached thirteen brains. This gives every other player one
 	 * more turn to gain as many brains as possible to win. The same basic while
 	 * loop from the main gameloop is implemented here. 
-	 * 
+	 */
 	 
 	private void endGame()
 	{	
 
 		//Display Winner and prompt play again
-	}*/
+	}
 }
