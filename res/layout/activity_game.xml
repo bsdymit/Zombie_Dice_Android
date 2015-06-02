@@ -165,7 +165,8 @@
 		android:layout_width="match_parent"
 		android:layout_row="3"
 		android:layout_column="0"
-		android:id="@+id/quitGameButton"/>
+		android:id="@+id/quitGameButton"
+		android:onClick="quit"/>
 
 </GridLayout>
 

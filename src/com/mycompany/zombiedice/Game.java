@@ -101,13 +101,23 @@ import android.view.View.*;public class Game extends Activity
 		}
 	}
 
-	public void quit()
+	public void quit(View view)
 	{
-		//Ask if theyreallywanttoquit
-
-		//Goto main menu ifthey do
-
-		//Continue otherwise
+		new AlertDialog.Builder(this)
+			.setTitle("Quit Game")
+			.setMessage("Are you sure you want to quit?")
+			.setPositiveButton("Quit", new DialogInterface.OnClickListener(){
+				public void onClick(DialogInterface dialog, int id)
+				{
+					toMainMenu();
+				}
+			})
+			.setNegativeButton("Cancel",  new DialogInterface.OnClickListener(){
+				public void onClick(DialogInterface dialog, int id){
+					//Continue Gameplay
+				}
+			})
+			.show();
 	}
 
 	/**
@@ -142,11 +152,6 @@ import android.view.View.*;public class Game extends Activity
 			this.totalBrains = (TextView)findViewById(buttonId);
 			this.totalBrains.setText(Integer.toString(players.getPlayers()[turnCounter].getBrainScore()));
 		}
-		/*try{
-			Thread.sleep(1000);
-		} catch(InterruptedException ex) {
-			Thread.currentThread().interrupt();
-		}*/
 			
 		brains = 0;
 		shotguns = 0;
@@ -165,7 +170,7 @@ import android.view.View.*;public class Game extends Activity
 			turnCounter = 0;
 			
 		if(this.finalRound && turnCounter == this.lastPlayer)
-			endGame();
+			endGame(view);
 			
 		int buttonId = getResources().getIdentifier("currentPlayerName", "id", getPackageName());
 		this.currentPlayer = (TextView)findViewById(buttonId);
@@ -196,7 +201,7 @@ import android.view.View.*;public class Game extends Activity
 	 * loop from the main gameloop is implemented here. 
 	 */
 	 
-	private void endGame()
+	private void endGame(View view)
 	{	
 		//Display Winner and prompt play again
 		int winner = 0;
@@ -209,6 +214,18 @@ import android.view.View.*;public class Game extends Activity
 		new AlertDialog.Builder(this)
 			.setTitle("GAME OVER")
 			.setMessage("WINNER:\n" + this.players.getPlayers()[winner].getName())
+			.setPositiveButton("Main Menu", new DialogInterface.OnClickListener(){
+				public void onClick(DialogInterface dialog, int id)
+				{
+					toMainMenu();
+				}
+			})
 			.show();
+	}
+	
+	private void toMainMenu()
+	{
+		Intent intent = new Intent(this, MainActivity.class);
+		startActivity(intent);
 	}
 }
