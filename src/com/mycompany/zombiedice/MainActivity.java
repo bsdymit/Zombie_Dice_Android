@@ -19,6 +19,7 @@ public class MainActivity extends Activity
 	public void playerEntry(View view)
 	{
 		Intent intent = new Intent(this, PlayerEntry.class);
+		finish();
 		startActivity(intent);
 	}
 	

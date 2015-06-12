@@ -115,6 +115,7 @@ public class PlayerEntry extends Activity
 		Bundle b = new Bundle();
 		b.putSerializable("queue", queue);
 		intent.putExtras(b);
+		finish();
 		startActivity(intent);
 	}
 }

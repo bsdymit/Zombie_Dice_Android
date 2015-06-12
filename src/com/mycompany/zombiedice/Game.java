@@ -119,6 +119,12 @@ import android.view.View.*;public class Game extends Activity
 			})
 			.show();
 	}
+	
+	@Override
+	public void onBackPressed()
+	{
+		toMainMenu();
+	}
 
 	/**
 	 * 
@@ -225,6 +231,7 @@ import android.view.View.*;public class Game extends Activity
 	
 	private void toMainMenu()
 	{
+		finish();
 		Intent intent = new Intent(this, MainActivity.class);
 		startActivity(intent);
 	}

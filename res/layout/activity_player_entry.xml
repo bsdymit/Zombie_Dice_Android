@@ -11,7 +11,7 @@
 		android:layout_row="0">
 
 		<TextView
-			android:layout_height="wrap_content"
+			android:layout_height="10dp"
 			android:text="@string/p_entry_text"
 			android:textAppearance="?android:attr/textAppearanceLarge"
 			android:layout_width="wrap_content"
@@ -47,28 +47,18 @@
 			android:layout_width="wrap_content"
 			android:layout_below="@id/activityplayerentryTextView2"
 			android:layout_marginTop="10dp"
-			android:id="@+id/activityplayerentryButton1"
+			android:id="@+id/addHumanButton"
 			android:onClick="addHumanPlayer"
 			android:layout_marginLeft="45dp"/>
-
-		<Button
-			android:layout_height="wrap_content"
-			android:text="Start Game"
-			android:layout_width="wrap_content"
-			android:layout_below="@id/activityplayerentryButton1"
-			android:layout_marginTop="10dp"
-			android:layout_centerInParent="true"
-			android:layout_marginBottom="10dp"
-			android:onClick="startGame"/>
 
 		<TextView
 			android:layout_height="wrap_content"
 			android:text="OR"
 			android:textAppearance="?android:attr/textAppearanceLarge"
 			android:layout_width="wrap_content"
-			android:layout_toRightOf="@id/activityplayerentryButton1"
+			android:layout_toRightOf="@id/addHumanButton"
 			android:layout_below="@id/activityplayerentryTextView2"
-			android:id="@+id/activityplayerentryTextView4"
+			android:id="@+id/orDivider"
 			android:layout_marginTop="20dp"/>
 
 		<Button
@@ -76,10 +66,11 @@
 			style="?android:attr/buttonStyleSmall"
 			android:text="Computer Player"
 			android:layout_width="wrap_content"
-			android:layout_toRightOf="@id/activityplayerentryTextView4"
+			android:layout_toRightOf="@id/orDivider"
 			android:layout_below="@id/activityplayerentryTextView2"
 			android:layout_marginTop="10dp"
-			android:onClick="addCompPlayer"/>
+			android:onClick="addCompPlayer"
+			android:id="@+id/addComputerButton"/>
 
 	</RelativeLayout>
 
@@ -87,7 +78,8 @@
 		android:layout_height="5dp"
 		android:background="?android:attr/dividerVertical"
 		android:layout_width="match_parent"
-		android:layout_row="1"/>
+		android:layout_row="1"
+		android:layout_marginTop="10dp"/>
 
 	<GridLayout
 		android:layout_height="wrap_content"
@@ -330,6 +322,34 @@
 			android:layout_column="0"/>
 
 	</GridLayout>
+
+	<Button
+		android:layout_height="wrap_content"
+		android:text="Start Game"
+		android:layout_width="wrap_content"
+		android:layout_marginTop="10dp"
+		android:layout_marginBottom="10dp"
+		android:onClick="startGame"
+		android:id="@+id/startGameButton"
+		android:layout_marginLeft="15dp"/>
+
+	<View
+		android:layout_height="25dp"
+		android:background="?android:attr/dividerHorizontal"
+		android:layout_width="5dp"
+		android:id="@+id/startDivider"
+		android:layout_toRightOf="@id/startGameButton"
+		android:visibility="invisible"/>
+
+	<Button
+		android:layout_height="wrap_content"
+		style="?android:attr/buttonStyleSmall"
+		android:text="Main Menu"
+		android:layout_width="wrap_content"
+		android:layout_marginTop="10dp"
+		android:layout_marginBottom="10dp"
+		android:id="@+id/quitToMenu"
+		android:layout_toRightOf="@id/startDivider"/>
 
 </GridLayout>
 
