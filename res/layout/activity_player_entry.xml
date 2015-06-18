@@ -11,7 +11,7 @@
 		android:layout_row="0">
 
 		<TextView
-			android:layout_height="10dp"
+			android:layout_height="wrap_content"
 			android:text="@string/p_entry_text"
 			android:textAppearance="?android:attr/textAppearanceLarge"
 			android:layout_width="wrap_content"
@@ -323,33 +323,41 @@
 
 	</GridLayout>
 
-	<Button
-		android:layout_height="wrap_content"
-		android:text="Start Game"
-		android:layout_width="wrap_content"
-		android:layout_marginTop="10dp"
-		android:layout_marginBottom="10dp"
-		android:onClick="startGame"
-		android:id="@+id/startGameButton"
-		android:layout_marginLeft="15dp"/>
+	<GridLayout
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:orientation="horizontal"
+		android:layout_gravity="center_vertical">
 
-	<View
-		android:layout_height="25dp"
-		android:background="?android:attr/dividerHorizontal"
-		android:layout_width="5dp"
-		android:id="@+id/startDivider"
-		android:layout_toRightOf="@id/startGameButton"
-		android:visibility="invisible"/>
+		<Button
+			android:layout_height="wrap_content"
+			android:text="Start Game"
+			android:layout_width="wrap_content"
+			android:layout_marginTop="10dp"
+			android:layout_marginBottom="10dp"
+			android:onClick="startGame"
+			android:id="@+id/startGameButton"
+			android:layout_marginLeft="45dp"/>
 
-	<Button
-		android:layout_height="wrap_content"
-		style="?android:attr/buttonStyleSmall"
-		android:text="Main Menu"
-		android:layout_width="wrap_content"
-		android:layout_marginTop="10dp"
-		android:layout_marginBottom="10dp"
-		android:id="@+id/quitToMenu"
-		android:layout_toRightOf="@id/startDivider"/>
+		<View
+			android:layout_height="25dp"
+			android:background="?android:attr/dividerHorizontal"
+			android:layout_width="25dp"
+			android:id="@+id/startDivider"
+			android:layout_toRightOf="@id/startGameButton"
+			android:visibility="invisible"
+			android:layout_gravity="center_vertical"/>
+
+		<Button
+			android:layout_height="wrap_content"
+			android:text="Main Menu"
+			android:layout_width="wrap_content"
+			android:layout_marginTop="10dp"
+			android:layout_marginBottom="10dp"
+			android:id="@+id/quitToMenu"
+			android:layout_toRightOf="@id/startDivider"/>
+
+	</GridLayout>
 
 </GridLayout>
 

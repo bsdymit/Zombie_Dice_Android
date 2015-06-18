@@ -6,6 +6,7 @@ import android.app.*;
 import android.os.*;
 import android.view.*;
 import android.widget.*;
+import android.content.*;
 import android.content.Intent;
 import PlayerQueue;
 
@@ -52,6 +53,8 @@ public class PlayerEntry extends Activity
 			int buttonId = getResources().getIdentifier(button, "id", getPackageName());
 			ImageButton imgButton = (ImageButton)findViewById(buttonId);
 			imgButton.setVisibility(1);
+			
+			newName.setText("");
 		}
 		else
 		{
@@ -74,6 +77,8 @@ public class PlayerEntry extends Activity
 			int buttonId = getResources().getIdentifier(button, "id", getPackageName());
 			ImageButton imgButton = (ImageButton)findViewById(buttonId);
 			imgButton.setVisibility(1);
+			
+			newName.setText("");
 		}
 		else
 		{
@@ -111,11 +116,27 @@ public class PlayerEntry extends Activity
 	
 	public void startGame(View view)
 	{
-		Intent intent = new Intent(this, Game.class);
-		Bundle b = new Bundle();
-		b.putSerializable("queue", queue);
-		intent.putExtras(b);
-		finish();
-		startActivity(intent);
+		if(queue.getTotalPlayers() < 2)
+		{
+			new AlertDialog.Builder(this)
+				.setTitle("Add Players")
+				.setMessage("You need to add at last two players to play.")
+				.setPositiveButton("Ok", new DialogInterface.OnClickListener(){
+					public void onClick(DialogInterface dialog, int id)
+					{
+						
+					}
+				})
+				.show();
+		}
+		else
+		{
+			Intent intent = new Intent(this, Game.class);
+			Bundle b = new Bundle();
+			b.putSerializable("queue", queue);
+			intent.putExtras(b);
+			finish();
+			startActivity(intent);
+		}
 	}
 }
