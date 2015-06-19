@@ -142,10 +142,10 @@ import android.view.View.*;public class Game extends Activity
 	 
 	private void ai()
 	{
-		AI ai = new AI(this.dice, this.shotguns, this.brains, this.rollResults, this.players, this.turnCounter);
-		while(ai.playing())
+		AI ai = new AI(this.shotguns, this.brains);
+		while(ai.playing(this.shotguns, this.brains))
 			roll(findViewById(android.R.id.content));
-		nextTurn(null);
+		nextTurn(findViewById(android.R.id.content));
 	}
 
 	/**
