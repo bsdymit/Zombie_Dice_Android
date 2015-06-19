@@ -8,12 +8,8 @@
  */
 public class AI 
 {
-	private Dice dice;
 	private int shotguns;
 	private int brains;
-	private char[] rollResults;
-	private PlayerQueue players;
-	private int turnCounter;
 	
 	/**
 	 * 
@@ -28,14 +24,10 @@ public class AI
 	 * @param players
 	 * @param turnCounter
 	 */
-	public AI (Dice dice, int shotguns, int brains, char[] rollResults, PlayerQueue players, int turnCounter)
+	public AI (int shotguns, int brains)
 	{
-		this.dice = dice;
 		this.shotguns = shotguns;
 		this.brains = brains;
-		this.rollResults = rollResults;
-		this.players = players;
-		this.turnCounter = turnCounter;
 	}
 	
 	/**
@@ -45,39 +37,18 @@ public class AI
 	 * instead of waiting for user input. 
 	 *
 	 */
-	public boolean playing()
+	public boolean playing(int shotguns, int brains)
 	{
+		this.shotguns = shotguns;
+		this.brains = brains;
 		boolean go = true;
-		
-		try
-		{
-			Thread.sleep(2500);
-		} catch (InterruptedException e) 
-		{
-			e.printStackTrace();
-		}
 		
 		while(go)
 		{
-			if(shotguns >= 3)
+			if(this.shotguns >= 3 || (this.shotguns == 2 && this.brains > 2) || 
+				(this.shotguns == 1 && this.brains > 4) || this.brains > 10)
 				go = false;
 				
-			else if(brains == 13)
-				go = false;
-			
-			if(shotguns == 2 && brains > 2)
-			{
-				go = false;
-			}
-			else if(shotguns == 1 && brains > 4)
-			{
-				go = false;
-			}
-			else if(brains > 10)
-			{
-				go = false;
-			}
-			
 			try
 			{
 				Thread.sleep(4000);
@@ -96,7 +67,7 @@ public class AI
 	 */
 	public int getShotguns() 
 	{
-		return shotguns;
+		return this.shotguns;
 	}
 
 	/**
@@ -106,6 +77,6 @@ public class AI
 	 */
 	public int getBrains() 
 	{
-		return brains;	
+		return this.brains;	
 	}
 }
