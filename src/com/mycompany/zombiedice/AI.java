@@ -42,21 +42,11 @@ public class AI
 		this.shotguns = shotguns;
 		this.brains = brains;
 		boolean go = true;
+	
+		if(this.shotguns >= 3 || (this.shotguns == 2 && this.brains > 2) || 
+			(this.shotguns == 1 && this.brains > 4) || this.brains > 10)
+			go = false;
 		
-		while(go)
-		{
-			if(this.shotguns >= 3 || (this.shotguns == 2 && this.brains > 2) || 
-				(this.shotguns == 1 && this.brains > 4) || this.brains > 10)
-				go = false;
-				
-			try
-			{
-				Thread.sleep(4000);
-			} catch (InterruptedException e) 
-			{
-				e.printStackTrace();
-			}
-		}
 		return go;
 	}
 

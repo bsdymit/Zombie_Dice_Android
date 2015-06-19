@@ -144,7 +144,16 @@ import android.view.View.*;public class Game extends Activity
 	{
 		AI ai = new AI(this.shotguns, this.brains);
 		while(ai.playing(this.shotguns, this.brains))
+		{
 			roll(findViewById(android.R.id.content));
+			try
+			{
+				Thread.sleep(3000);
+			} catch (InterruptedException e) 
+			{
+				e.printStackTrace();
+			}
+		}
 		nextTurn(findViewById(android.R.id.content));
 	}
 
