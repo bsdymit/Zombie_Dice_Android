@@ -113,6 +113,19 @@ public class PlayerEntry extends Activity
 			}
 		}
 	}
+
+	@Override
+	public void onBackPressed()
+	{
+		toMainMenu(findViewById(android.R.id.content));
+	}
+	
+	public void toMainMenu(View view)
+	{
+		finish();
+		Intent intent = new Intent(this, MainActivity.class);
+		startActivity(intent);
+	}
 	
 	public void startGame(View view)
 	{

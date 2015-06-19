@@ -96,8 +96,16 @@ import android.view.View.*;public class Game extends Activity
 		// Checks to see if player was shotgunned
 		if (shotguns >= 3)
 		{
-			//Print Shotguns
-			nextTurn(null);
+			new AlertDialog.Builder(this)
+				.setTitle("ShotGunned!")
+				.setMessage("You rolled 3 shotguns this round and lost your brains!")
+				.setPositiveButton("Ok", new DialogInterface.OnClickListener(){
+					public void onClick(DialogInterface dialog, int id)
+					{
+						nextTurn(null);
+					}
+				})
+				.show();
 		}
 	}
 
@@ -123,7 +131,7 @@ import android.view.View.*;public class Game extends Activity
 	@Override
 	public void onBackPressed()
 	{
-		toMainMenu();
+		quit(findViewById(android.R.id.content));
 	}
 
 	/**
@@ -220,10 +228,18 @@ import android.view.View.*;public class Game extends Activity
 		new AlertDialog.Builder(this)
 			.setTitle("GAME OVER")
 			.setMessage("WINNER:\n" + this.players.getPlayers()[winner].getName())
-			.setPositiveButton("Main Menu", new DialogInterface.OnClickListener(){
+			.setNegativeButton("Main Menu", new DialogInterface.OnClickListener(){
 				public void onClick(DialogInterface dialog, int id)
 				{
 					toMainMenu();
+				}
+			})
+			.setPositiveButton("Play Again", new DialogInterface.OnClickListener(){
+				public void onClick(DialogInterface dialog, int id)
+				{
+					Intent intent = new Intent(Game.this, Game.class);
+					finish();
+					startActivity(intent);
 				}
 			})
 			.show();
