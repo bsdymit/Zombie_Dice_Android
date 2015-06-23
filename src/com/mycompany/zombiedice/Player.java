@@ -84,4 +84,9 @@ public class Player implements Serializable
 	{
 		this.brains += score;
 	}
+	
+	public void resetScore()
+	{
+		this.brains = 0;
+	}
 }

@@ -25,6 +25,7 @@ import android.view.View.*;
 public class GameUI extends Activity
 {
 	private Game game;
+	private PlayerQueue queue;
 	TextView currentPlayer;
 	TextView totalBrains;
 	ImageView brainsImage;
@@ -46,7 +47,7 @@ public class GameUI extends Activity
 		Intent intent=this.getIntent();
 		Bundle bundle=intent.getExtras();
 		
-		PlayerQueue queue = (PlayerQueue)bundle.getSerializable("queue");
+		this.queue = (PlayerQueue)bundle.getSerializable("queue");
 
 		initializeGame(queue);
 		
@@ -55,29 +56,27 @@ public class GameUI extends Activity
 	public void initializeGame(PlayerQueue queue)
 	{
 		this.game = new Game(queue);
+		this.queue = this.game.getPlayers();
 		int buttonId = getResources().getIdentifier("totalPlayerBrains", "id", getPackageName());
 		this.totalBrains = (TextView)findViewById(buttonId);
-		this.totalBrains.setText(Integer.toString(brains));
+		this.totalBrains.setText(Integer.toString(this.game.getBrains()));
 		
 		buttonId = getResources().getIdentifier("currentPlayerName", "id", getPackageName());
 		this.currentPlayer = (TextView)findViewById(buttonId);
-		this.currentPlayer.setText(this.players.getName(turnCounter));
+		this.currentPlayer.setText(this.game.getPlayers().getName(this.game.getTurnCounter()));
+		
+		updateBrainsAndShots(null);
 	}
 
-	public void rollResults(View view)
+	public void roll(View view)
 	{
+		if(this.game.roll())
+			shotgunDialog(view);
+		else
+		{
+		updateBrainsAndShots(view);
 		// Print out dice results 
-		int buttonId = getResources().getIdentifier("brainsImage", "id", getPackageName());
-		this.brainsImage = (ImageView)findViewById(buttonId);
-		this.brainsImage.setBackgroundResource(numbers[brains]);
-
-		
-		buttonId = getResources().getIdentifier("shotgunsImage", "id", getPackageName());
-		this.shotsImage = (ImageView)findViewById(buttonId);
-		this.shotsImage.setBackgroundResource(numbers[shotguns]);
-		
-		// Checks to see if player was shotgunned
-		
+		}
 	}
 	
 	public void shotgunDialog(View view)
@@ -129,30 +128,44 @@ public class GameUI extends Activity
 	 
 	public void nextTurn(View view)
 	{
-		
-		players.getPlayers()[turnCounter].addBrains(brains);
+		if(this.game.nextTurn())
+			endGame(view);
+		else{
 		int buttonId = getResources().getIdentifier("totalPlayerBrains", "id", getPackageName());
 		this.totalBrains = (TextView)findViewById(buttonId);
-		this.totalBrains.setText(Integer.toString(players.getPlayers()[turnCounter].getBrainScore()));
+		this.totalBrains.setText(Integer.toString(this.game.getPlayers().getPlayers()[this.game.getTurnCounter()].getBrainScore()));
 		
 		buttonId = getResources().getIdentifier("currentPlayerName", "id", getPackageName());
 		this.currentPlayer = (TextView)findViewById(buttonId);
-		this.currentPlayer.setText(this.players.getName(turnCounter));
+		this.currentPlayer.setText(this.game.getPlayers().getName(this.game.getTurnCounter()));
 		
 		buttonId = getResources().getIdentifier("totalPlayerBrains", "id", getPackageName());
 		this.totalBrains = (TextView)findViewById(buttonId);
-		this.totalBrains.setText(Integer.toString(this.players.getPlayers()[turnCounter].getBrainScore()));
+		this.totalBrains.setText(Integer.toString(this.game.getPlayers().getPlayers()[this.game.getTurnCounter()].getBrainScore()));
 		
 		buttonId = getResources().getIdentifier("brainsImage", "id", getPackageName());
 		this.brainsImage = (ImageView)findViewById(buttonId);
-		this.brainsImage.setBackgroundResource(numbers[brains]);
+		this.brainsImage.setBackgroundResource(numbers[this.game.getBrains()]);
 
 
 		buttonId = getResources().getIdentifier("shotgunsImage", "id", getPackageName());
 		this.shotsImage = (ImageView)findViewById(buttonId);
-		this.shotsImage.setBackgroundResource(numbers[shotguns]);
+		this.shotsImage.setBackgroundResource(numbers[this.game.getShotguns()]);
+		}
 	}
 
+	private void updateBrainsAndShots(View view)
+	{
+		int buttonId = getResources().getIdentifier("brainsImage", "id", getPackageName());
+		this.brainsImage = (ImageView)findViewById(buttonId);
+		this.brainsImage.setBackgroundResource(numbers[this.game.getBrains()]);
+
+
+		buttonId = getResources().getIdentifier("shotgunsImage", "id", getPackageName());
+		this.shotsImage = (ImageView)findViewById(buttonId);
+		this.shotsImage.setBackgroundResource(numbers[this.game.getShotguns()]);
+	}
+	
 	/**
 	 * 
 	 * This private method is called from the nextTurn method when a player or 
@@ -165,7 +178,7 @@ public class GameUI extends Activity
 	{	
 		new AlertDialog.Builder(this)
 			.setTitle("GAME OVER")
-			.setMessage("WINNER:\n" + this.players.getPlayers()[this.game.getWinner()].getName())
+			.setMessage("WINNER:\n" + this.game.getPlayers().getPlayers()[this.game.getWinner()].getName())
 			.setNegativeButton("Main Menu", new DialogInterface.OnClickListener(){
 				public void onClick(DialogInterface dialog, int id)
 				{
@@ -175,9 +188,7 @@ public class GameUI extends Activity
 			.setPositiveButton("Play Again", new DialogInterface.OnClickListener(){
 				public void onClick(DialogInterface dialog, int id)
 				{
-					Intent intent = new Intent(GameUI.this, GameUI.class);
-					finish();
-					startActivity(intent);
+					initializeGame(queue);
 				}
 			})
 			.show();

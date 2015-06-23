@@ -29,7 +29,7 @@
             android:value="com.mycompany.zombiedice.MainActivity" />
     	</activity>
 		<activity
-			android:name="com.mycompany.zombiedice.Game"
+			android:name="com.mycompany.zombiedice.GameUI"
 			android:label="@string/game"
 			android:parentActivityName="com.mycompany.zombiedice.PlayerEntry" >
 			<meta-data

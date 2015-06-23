@@ -104,6 +104,14 @@ public class PlayerQueue implements Serializable
 		}
 	}
 	
+	public void resetScores()
+	{
+		for(int i = 0; i < this.totalPlayers; i++)
+		{
+			this.players[i].resetScore();
+		}
+	}
+	
 	/**
 	 * 
 	 * This method returns the array of Player objects.

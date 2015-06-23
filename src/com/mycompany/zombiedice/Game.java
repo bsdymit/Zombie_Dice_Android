@@ -30,6 +30,7 @@ public class Game
 	{
 		this.dice = new Dice();
 		this.players = queue;
+		this.players.resetScores();
 		this.rollResults = new char[3];
 		this.brains = 0;
 		this.shotguns = 0;
@@ -38,7 +39,7 @@ public class Game
 		turnCounter = 0;
 	}
 	
-	public void roll(View view)
+	public boolean roll()
 	{
 		dice.roll();
 		shotguns += dice.getNumShotguns();
@@ -46,15 +47,16 @@ public class Game
 		
 		if (shotguns >= 3)
 		{
-
+			return true;
 		}
+		return false;
 	}
 	
-	public void nextTurn(View view)
+	public boolean nextTurn()
 	{
 		if (shotguns < 3)
 		{
-			//next turn?
+			players.getPlayers()[this.turnCounter].addBrains(this.brains);
 		}
 			
 		brains = 0;
@@ -74,10 +76,12 @@ public class Game
 			turnCounter = 0;
 			
 		if(this.finalRound && turnCounter == this.lastPlayer)
-			getWinner();
+			return true;
 			
 		if (players.getPlayers()[turnCounter].getType() == 'c')
 			ai();
+			
+		return false;
 	}
 	
 	public int getWinner()
