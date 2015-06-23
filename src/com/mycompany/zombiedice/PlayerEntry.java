@@ -144,7 +144,7 @@ public class PlayerEntry extends Activity
 		}
 		else
 		{
-			Intent intent = new Intent(this, Game.class);
+			Intent intent = new Intent(this, GameUI.class);
 			Bundle b = new Bundle();
 			b.putSerializable("queue", queue);
 			intent.putExtras(b);
