@@ -61,15 +61,6 @@ public class GameUI extends Activity
 
 	public void initializeGame(PlayerQueue queue)
 	{
-		this.dice = new Dice();
-		this.players = queue;
-		this.rollResults = new char[3];
-		this.brains = 0;
-		this.shotguns = 0;
-		this.turnCounter = 0;
-		this.finalRound = false;
-		turnCounter = 0;
-		
 		int buttonId = getResources().getIdentifier("totalPlayerBrains", "id", getPackageName());
 		this.totalBrains = (TextView)findViewById(buttonId);
 		this.totalBrains.setText(Integer.toString(brains));
@@ -144,33 +135,6 @@ public class GameUI extends Activity
 	 
 	public void nextTurn(View view)
 	{
-		if (shotguns < 3)
-		{
-			players.getPlayers()[turnCounter].addBrains(brains);
-			int buttonId = getResources().getIdentifier("totalPlayerBrains", "id", getPackageName());
-			this.totalBrains = (TextView)findViewById(buttonId);
-			this.totalBrains.setText(Integer.toString(players.getPlayers()[turnCounter].getBrainScore()));
-		}
-			
-		brains = 0;
-		shotguns = 0;
-
-		if (players.getPlayers()[turnCounter].getBrainScore() >= 13)
-		{
-			finalRound = true;
-			this.lastPlayer = turnCounter;
-		}
-
-		dice = new Dice();
-
-		if (turnCounter < players.getTotalPlayers() - 1)
-			turnCounter++;
-		else
-			turnCounter = 0;
-			
-		if(this.finalRound && turnCounter == this.lastPlayer)
-			endGame(view);
-			
 		int buttonId = getResources().getIdentifier("currentPlayerName", "id", getPackageName());
 		this.currentPlayer = (TextView)findViewById(buttonId);
 		this.currentPlayer.setText(this.players.getName(turnCounter));
@@ -187,9 +151,6 @@ public class GameUI extends Activity
 		buttonId = getResources().getIdentifier("shotgunsImage", "id", getPackageName());
 		this.shotsImage = (ImageView)findViewById(buttonId);
 		this.shotsImage.setBackgroundResource(numbers[shotguns]);
-	
-		if (players.getPlayers()[turnCounter].getType() == 'c')
-			ai();
 	}
 
 	/**
@@ -202,14 +163,6 @@ public class GameUI extends Activity
 	 
 	private void endGame(View view)
 	{	
-		//Display Winner and prompt play again
-		int winner = 0;
-		for(int i = 0; i < this.players.getTotalPlayers(); i++)
-		{
-			if(this.players.getPlayers()[i].getBrainScore() > 
-				this.players.getPlayers()[winner].getBrainScore())
-				winner = i;
-		}
 		new AlertDialog.Builder(this)
 			.setTitle("GAME OVER")
 			.setMessage("WINNER:\n" + this.players.getPlayers()[winner].getName())
