@@ -24,14 +24,7 @@ import android.view.View.*;
 
 public class GameUI extends Activity
 {
-	private int turnCounter;
-	private PlayerQueue players;
-	private Dice dice;
-	private int shotguns;
-	private int brains;
-	private boolean finalRound;
-	private int lastPlayer;
-	private char[] rollResults;
+	private Game game;
 	TextView currentPlayer;
 	TextView totalBrains;
 	ImageView brainsImage;
@@ -61,6 +54,7 @@ public class GameUI extends Activity
 
 	public void initializeGame(PlayerQueue queue)
 	{
+		this.game = new Game(queue);
 		int buttonId = getResources().getIdentifier("totalPlayerBrains", "id", getPackageName());
 		this.totalBrains = (TextView)findViewById(buttonId);
 		this.totalBrains.setText(Integer.toString(brains));
@@ -135,7 +129,13 @@ public class GameUI extends Activity
 	 
 	public void nextTurn(View view)
 	{
-		int buttonId = getResources().getIdentifier("currentPlayerName", "id", getPackageName());
+		
+		players.getPlayers()[turnCounter].addBrains(brains);
+		int buttonId = getResources().getIdentifier("totalPlayerBrains", "id", getPackageName());
+		this.totalBrains = (TextView)findViewById(buttonId);
+		this.totalBrains.setText(Integer.toString(players.getPlayers()[turnCounter].getBrainScore()));
+		
+		buttonId = getResources().getIdentifier("currentPlayerName", "id", getPackageName());
 		this.currentPlayer = (TextView)findViewById(buttonId);
 		this.currentPlayer.setText(this.players.getName(turnCounter));
 		
@@ -165,7 +165,7 @@ public class GameUI extends Activity
 	{	
 		new AlertDialog.Builder(this)
 			.setTitle("GAME OVER")
-			.setMessage("WINNER:\n" + this.players.getPlayers()[winner].getName())
+			.setMessage("WINNER:\n" + this.players.getPlayers()[this.game.getWinner()].getName())
 			.setNegativeButton("Main Menu", new DialogInterface.OnClickListener(){
 				public void onClick(DialogInterface dialog, int id)
 				{

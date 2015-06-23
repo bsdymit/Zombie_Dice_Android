@@ -21,7 +21,12 @@ public class Game
 	private int lastPlayer;
 	private char[] rollResults;
 	
-	public void initializeGame(PlayerQueue queue)
+	public Game(PlayerQueue queue)
+	{
+		initializeGame(queue);
+	}
+	
+	private void initializeGame(PlayerQueue queue)
 	{
 		this.dice = new Dice();
 		this.players = queue;
@@ -49,10 +54,7 @@ public class Game
 	{
 		if (shotguns < 3)
 		{
-			players.getPlayers()[turnCounter].addBrains(brains);
-			int buttonId = getResources().getIdentifier("totalPlayerBrains", "id", getPackageName());
-			this.totalBrains = (TextView)findViewById(buttonId);
-			this.totalBrains.setText(Integer.toString(players.getPlayers()[turnCounter].getBrainScore()));
+			//next turn?
 		}
 			
 		brains = 0;
@@ -72,13 +74,13 @@ public class Game
 			turnCounter = 0;
 			
 		if(this.finalRound && turnCounter == this.lastPlayer)
-			endGame(view);
+			getWinner();
 			
 		if (players.getPlayers()[turnCounter].getType() == 'c')
 			ai();
 	}
 	
-	private void endGame(View view)
+	public int getWinner()
 	{	
 		//Display Winner and prompt play again
 		int winner = 0;
@@ -88,6 +90,7 @@ public class Game
 				this.players.getPlayers()[winner].getBrainScore())
 				winner = i;
 		}
+		return winner;
 	}
 	
 	/**
@@ -99,7 +102,7 @@ public class Game
 	private void ai()
 	{
 		AI ai = new AI(this.shotguns, this.brains);
-		while(ai.playing(this.shotguns, this.brains))
+		/*while(ai.playing(this.shotguns, this.brains))
 		{
 			roll(findViewById(android.R.id.content));
 			try
@@ -110,6 +113,6 @@ public class Game
 				e.printStackTrace();
 			}
 		}
-		nextTurn(findViewById(android.R.id.content));
+		nextTurn(findViewById(android.R.id.content));*/
 	}
 }
