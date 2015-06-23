@@ -115,4 +115,24 @@ public class Game
 		}
 		nextTurn(findViewById(android.R.id.content));*/
 	}
+	
+	public int getTurnCounter()
+	{
+		return this.turnCounter;
+	}
+	
+	public PlayerQueue getPlayers()
+	{
+		return this.players;
+	}
+	
+	public int getShotguns()
+	{
+		return this.shotguns;
+	}
+	
+	public int getBrains()
+	{
+		return this.brains;
+	}
 }
