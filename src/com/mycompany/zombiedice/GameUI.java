@@ -74,8 +74,7 @@ public class GameUI extends Activity
 			shotgunDialog(view);
 		else
 		{
-		updateBrainsAndShots(view);
-		// Print out dice results 
+			updateBrainsAndShots(view);
 		}
 	}
 	
@@ -130,27 +129,36 @@ public class GameUI extends Activity
 	{
 		if(this.game.nextTurn())
 			endGame(view);
-		else{
-		int buttonId = getResources().getIdentifier("totalPlayerBrains", "id", getPackageName());
-		this.totalBrains = (TextView)findViewById(buttonId);
-		this.totalBrains.setText(Integer.toString(this.game.getPlayers().getPlayers()[this.game.getTurnCounter()].getBrainScore()));
+		else
+		{
+			int buttonId = getResources().getIdentifier("totalPlayerBrains", "id", getPackageName());
+			this.totalBrains = (TextView)findViewById(buttonId);
+			this.totalBrains.setText(Integer.toString(this.game.getPlayers().getPlayers()[this.game.getTurnCounter()].getBrainScore()));
 		
-		buttonId = getResources().getIdentifier("currentPlayerName", "id", getPackageName());
-		this.currentPlayer = (TextView)findViewById(buttonId);
-		this.currentPlayer.setText(this.game.getPlayers().getName(this.game.getTurnCounter()));
+			buttonId = getResources().getIdentifier("currentPlayerName", "id", getPackageName());
+			this.currentPlayer = (TextView)findViewById(buttonId);
+			this.currentPlayer.setText(this.game.getPlayers().getName(this.game.getTurnCounter()));
 		
-		buttonId = getResources().getIdentifier("totalPlayerBrains", "id", getPackageName());
-		this.totalBrains = (TextView)findViewById(buttonId);
-		this.totalBrains.setText(Integer.toString(this.game.getPlayers().getPlayers()[this.game.getTurnCounter()].getBrainScore()));
+			buttonId = getResources().getIdentifier("totalPlayerBrains", "id", getPackageName());
+			this.totalBrains = (TextView)findViewById(buttonId);
+			this.totalBrains.setText(Integer.toString(this.game.getPlayers().getPlayers()[this.game.getTurnCounter()].getBrainScore()));
 		
-		buttonId = getResources().getIdentifier("brainsImage", "id", getPackageName());
-		this.brainsImage = (ImageView)findViewById(buttonId);
-		this.brainsImage.setBackgroundResource(numbers[this.game.getBrains()]);
+			buttonId = getResources().getIdentifier("brainsImage", "id", getPackageName());
+			this.brainsImage = (ImageView)findViewById(buttonId);
+			this.brainsImage.setBackgroundResource(numbers[this.game.getBrains()]);
 
 
-		buttonId = getResources().getIdentifier("shotgunsImage", "id", getPackageName());
-		this.shotsImage = (ImageView)findViewById(buttonId);
-		this.shotsImage.setBackgroundResource(numbers[this.game.getShotguns()]);
+			buttonId = getResources().getIdentifier("shotgunsImage", "id", getPackageName());
+			this.shotsImage = (ImageView)findViewById(buttonId);
+			this.shotsImage.setBackgroundResource(numbers[this.game.getShotguns()]);
+		
+			if(this.game.chechIfAi())
+			{
+				while(this.game.ai())
+				{
+					roll(view);
+				}
+			}
 		}
 	}
 

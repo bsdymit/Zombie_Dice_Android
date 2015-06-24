@@ -103,21 +103,17 @@ public class Game
 	 * to have a computer play independently of a user. 
 	 */ 
 
-	private void ai()
+	public boolean ai()
 	{
 		AI ai = new AI(this.shotguns, this.brains);
-		/*while(ai.playing(this.shotguns, this.brains))
-		{
-			roll(findViewById(android.R.id.content));
-			try
-			{
-				Thread.sleep(1000);
-			} catch (InterruptedException e) 
-			{
-				e.printStackTrace();
-			}
-		}
-		nextTurn(findViewById(android.R.id.content));*/
+		return ai.playing(this.shotguns, this.brains);
+	}
+	
+	public boolean chechIfAi()
+	{
+		if(this.getPlayers().getType(this.turnCounter) == 'c')
+			return true;
+		return false;
 	}
 	
 	public int getTurnCounter()
